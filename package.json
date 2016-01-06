@@ -1,9 +1,10 @@
 {
   "name": "nord-react-starter",
   "version": "1.0.0",
-  "description": "",
+  "description": "React starter template",
   "main": "src/main.js",
   "scripts": {
+    "prestart": "npm install",
     "start": "./node_modules/.bin/webpack-dev-server --inline --hot --progress --colors",
     "dist": "./node_modules/.bin/webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,23 +14,29 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "webpack-dev-server": "^1.12.1"
+  },
+  "dependencies": {
     "babel-core": "^6.2.1",
     "babel-loader": "^6.2.0",
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-react": "^6.1.18",
     "babel-preset-stage-2": "^6.1.18",
     "css-loader": "^0.23.0",
+    "exports-loader": "^0.6.2",
     "extract-text-webpack-plugin": "^0.9.1",
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^1.7.0",
+    "imports-loader": "^0.6.5",
+    "json-loader": "^0.5.4",
     "node-sass": "^3.4.2",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-hot-loader": "^1.3.0",
+    "require-dir": "^0.3.0",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",
-    "webpack": "^1.12.8",
-    "webpack-dev-server": "^1.12.1"
+    "webpack": "^1.12.8"
   }
 }

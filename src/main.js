@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {render} from 'react-dom';
 
 import './main.scss';
 
@@ -7,7 +7,7 @@ const App = () => (
   <div>Hello from React!</div>
 );
 
-ReactDOM.render(
+render(
   <App />,
   document.getElementById('root')
 );
