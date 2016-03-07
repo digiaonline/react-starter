@@ -1,0 +1,12 @@
+@import "../node_modules/foundation-sites/scss/foundation";
+
+@include foundation-everything;
+
+@import "components/login/login";
+@import "components/hello/hello";
+@import "components/navbar/navbar";
+@import "components/not-found/not-found";
+
+body {
+  background: #f5f5f5;
+}

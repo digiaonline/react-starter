@@ -1,0 +1,15 @@
+.login {
+  &__box {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+    background: white;
+    margin: rem-calc(40) auto;
+    padding: rem-calc(20);
+    width: 300px;
+  }
+
+  &__submit {
+    @extend .button;
+    @extend .expanded;
+    margin-bottom: 0;
+  }
+}
