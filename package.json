@@ -5,7 +5,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "webpack-dev-server --inline --progress --colors --config webpack/development.js",
-    "dist": "NODE_ENV=production webpack -p --config webpack/production.js",
+    "dist": "webpack -p --config webpack/production.js",
     "lint": "eslint src",
     "test": "mocha --compilers js:babel-core/register --require test/index.js --recursive",
     "test:watch": "npm run test -- --watch"
