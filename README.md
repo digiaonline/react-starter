@@ -26,25 +26,31 @@ npm install
 
 ## Usage
 
-Start development server:
+### Development server
+
+Run the following command to start the development server:
 
 ```
 npm start
 ```
 
-Build distribution build:
+### Distribution build
+
+Run the following command to build the distribution build:
 
 ```
 npm run dist
 ```
 
-Run test suite:
+### Test suite
+
+Run the following command to run the test suite
 
 ```
 npm test
 ```
 
-or
+or alternatively you can run the test suite with watch:
 
 ```
 npm run test:watch
