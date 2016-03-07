@@ -16,9 +16,9 @@ Building blocks:
 - [Mocha](https://mochajs.org/) Testing framework
 - [Chai](http://chaijs.com/) Assertation library
 
-## Setup
+## Installation
 
-Install dependencies:
+Run the following command to install the dependencies:
 
 ```
 npm install
@@ -42,7 +42,7 @@ Run the following command to build the distribution build:
 npm run dist
 ```
 
-### Test suite
+## Test suite
 
 Run the following command to run the test suite
 
@@ -50,7 +50,7 @@ Run the following command to run the test suite
 npm test
 ```
 
-or alternatively you can run the test suite with watch:
+Alternatively you can run the test suite in watch-mode:
 
 ```
 npm run test:watch
