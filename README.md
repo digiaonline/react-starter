@@ -5,6 +5,7 @@ Starter template for React applications.
 Building blocks:
 
 - [React](https://facebook.github.io/react/) User interface components
+- [React + Foundation](https://github.com/nordsoftware/react-foundation/) Foundation as React components  
 - [Redux](http://redux.js.org/) Predictable state container
 - [Immutable](https://facebook.github.io/immutable-js/) Immutable collections
 - [Lodash](https://lodash.com/) Utility library
