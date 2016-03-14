@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { login } from '../../actions/auth';
 import { debug } from '../../helpers/log';
+import { Button, ButtonColors } from 'react-foundation';
 
 export class Login extends Component {
   componentWillReceiveProps(nextProps) {
@@ -26,7 +27,7 @@ export class Login extends Component {
 
     return (
       <div className="login">
-        <div className="login__box">
+        <div className="login-box">
           <form onSubmit={handleSubmit}>
             <label>
               Email
@@ -36,7 +37,7 @@ export class Login extends Component {
               Password
               <input type="password" ref="password" placeholder="******" required/>
             </label>
-            <button className="login__submit" type="submit">Log in</button>
+            <Button type="submit" color={ButtonColors.PRIMARY} isExpanded>Log in</Button>
           </form>
         </div>
       </div>

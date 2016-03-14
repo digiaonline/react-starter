@@ -6,15 +6,11 @@ import { NavbarContainer } from '../navbar/navbar';
 
 export class App extends Component {
   render() {
-    const { isAuthenticated, children } = this.props;
-
     return (
       <div className="app">
         <NavbarContainer/>
-        {children}
+        {this.props.children}
       </div>
     );
   }
 }
-
-export const AppContainer = connect()(App);

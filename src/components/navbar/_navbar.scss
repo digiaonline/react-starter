@@ -1,29 +1,7 @@
 .navbar {
-  & {
-    @extend .container;
-    @extend .top-bar;
-    @include top-bar-container;
-  }
-
-  &__inner {
-    @extend .row;
-  }
-
-  &__content {
-    @extend .columns;
-    @extend .large-12;
-  }
-
-  &__title-link {
-    color: $dark-gray;
+  .top-bar-title {
+    color: #222;
     font-weight: bold;
-  }
-
-  &__left {
-    @extend .top-bar-left;
-  }
-
-  &__right {
-    @extend .top-bar-right;
+    padding-top: 7px;
   }
 }
