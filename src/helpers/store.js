@@ -1,5 +1,5 @@
 import { combineReducers, applyMiddleware, createStore } from 'redux';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import apiMiddleware from '../middleware/api';
@@ -32,7 +32,7 @@ export function buildStore() {
     routing: routerReducer
   });
 
-  const routerHistoryMiddleware = routerMiddleware(hashHistory);
+  const routerHistoryMiddleware = routerMiddleware(browserHistory);
 
   return applyMiddleware(thunk, apiMiddleware, routerHistoryMiddleware)(createStore)(rootReducer);
 }
