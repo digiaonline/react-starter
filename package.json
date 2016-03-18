@@ -8,6 +8,7 @@
     "dist": "webpack -p --config webpack/production.js",
     "lint": "eslint src",
     "test": "mocha --compilers js:babel-core/register --require test/index.js --recursive",
+    "test:cover": "istanbul cover _mocha -- --compilers js:babel-core/register --require test/index.js --recursive",
     "test:watch": "npm run test -- --watch"
   },
   "authors": [
@@ -17,6 +18,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-immutable": "^1.5.3",
+    "istanbul": "^1.0.0-alpha.2",
     "mocha": "^2.4.5",
     "webpack-dev-server": "^1.12.1"
   },
