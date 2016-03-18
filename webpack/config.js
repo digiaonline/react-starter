@@ -7,7 +7,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].[hash].js',
-    publicPath: '/',
     sourceMapFilename: '[name].[hash].js.map',
     chunkFilename: '[id].chunk.js'
   },
@@ -25,8 +24,7 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loader: 'babel?cacheDirectory=true!eslint',
-        exclude: /(node_modules|src\/client\/vendor)/
+        loader: 'babel?cacheDirectory=true!eslint'
       },
       {
         test: /\.json$/,
