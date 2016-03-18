@@ -1,11 +1,12 @@
 import React from 'react';
+import { Row, Column } from 'react-foundation';
 
 export const Hello = () => (
   <div className="hello">
-    <div className="row">
-      <div className="columns large-12">
+    <Row>
+      <Column large={12}>
         Hello from React!
-      </div>
-    </div>
+      </Column>
+    </Row>
   </div>
 );

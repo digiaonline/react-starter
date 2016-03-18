@@ -1,11 +1,12 @@
 import React from 'react';
+import { Row, Column } from 'react-foundation';
 
 export const NotFound = () => (
   <div className="not-found">
-    <div className="row">
-      <div className="columns large-12">
+    <Row>
+      <Column large={12}>
         Page not found
-      </div>
-    </div>
+      </Column>
+    </Row>
   </div>
 );

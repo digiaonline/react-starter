@@ -4,13 +4,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavbarContainer } from '../navbar/navbar';
 
-export class App extends Component {
-  render() {
-    return (
-      <div className="app">
-        <NavbarContainer/>
-        {this.props.children}
-      </div>
-    );
-  }
-}
+export const App = (props) => {
+  return (
+    <div className="app">
+      <NavbarContainer/>
+      {props.children}
+    </div>
+  );
+};
