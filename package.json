@@ -17,9 +17,17 @@
   "license": "MIT",
   "devDependencies": {
     "chai": "^3.5.0",
+    "chai-enzyme": "^0.4.1",
     "chai-immutable": "^1.5.3",
+    "chai-jsx": "^1.0.1",
+    "cheerio": "^0.20.0",
+    "enzyme": "^2.1.0",
     "istanbul": "^1.0.0-alpha.2",
+    "jsdom": "^8.1.0",
     "mocha": "^2.4.5",
+    "react": "^0.14.7",
+    "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0",
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
