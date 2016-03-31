@@ -3,12 +3,21 @@
 import { fetchFromApi } from '../helpers/api';
 
 export const AuthActionTypes = {
-  LOGIN_REQUEST: 'LOGIN_REQUEST',
-  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
-  LOGIN_FAILURE: 'LOGIN_FAILURE',
-  LOGOUT: 'LOGOUT'
+  LOGIN_REQUEST: 'AUTH/LOGIN_REQUEST',
+  LOGIN_SUCCESS: 'AUTH/LOGIN_SUCCESS',
+  LOGIN_FAILURE: 'AUTH/LOGIN_FAILURE',
+  LOAD_REQUEST: 'AUTH/LOAD_REQUEST',
+  LOAD_USER: 'AUTH/LOAD_USER',
+  LOAD_FAILURE: 'AUTH/LOAD_FAILURE',
+  LOGOUT: 'AUTH/LOGOUT'
 };
 
+/**
+ *
+ * @param {string} username
+ * @param {string }password
+ * @returns {Object}
+ */
 export function login(username, password) {
   const form = new FormData();
 
@@ -25,10 +34,31 @@ export function login(username, password) {
   };
 }
 
+/**
+ *
+ * @returns {Object}
+ */
+export function loadUser() {
+  return {
+    types: [AuthActionTypes.LOAD_REQUEST, AuthActionTypes.LOAD_USER, AuthActionTypes.LOAD_FAILURE],
+    shouldCallApi: state => state.auth.get('isAuthenticated'),
+    callApi: dispatch => fetchFromApi('me', null, dispatch)
+  };
+}
+
+/**
+ *
+ * @param {Object} result
+ * @returns {Object}
+ */
 export function refreshSuccess(result) {
   return { type: AuthActionTypes.LOGIN_SUCCESS, ...result };
 }
 
+/**
+ *
+ * @returns {Object}
+ */
 export function logout() {
   return { type: AuthActionTypes.LOGOUT };
 }

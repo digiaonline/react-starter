@@ -1,6 +1,7 @@
 /*eslint no-undef: 0*/
 
-import { isUndefined } from 'lodash';
+import { isString, isUndefined } from 'lodash';
+import { debug } from './log';
 
 if (isUndefined(STORAGE_PREFIX)) {
   throw new Error('STORAGE_PREFIX must be set.');
@@ -11,7 +12,8 @@ if (isUndefined(STORAGE_PREFIX)) {
  * @param {string} key
  */
 export function getStorageItem(key) {
-  return localStorage.getItem(buildStorageKey(key));
+  const value = localStorage.getItem(buildStorageKey(key));
+  return isJson(value) ? JSON.parse(value) : value;
 }
 
 /**
@@ -20,8 +22,11 @@ export function getStorageItem(key) {
  * @param {*} value
  */
 export function setStorageItem(key, value) {
+  if (!isString(value)) {
+    value = JSON.stringify(value);
+  }
   localStorage.setItem(buildStorageKey(key), value);
-  debug('storage item set: %s => %s', key, value);
+  debug('storage item set: %s -> %s', key, value);
 }
 
 /**
@@ -40,4 +45,18 @@ export function removeStorageItem(key) {
  */
 function buildStorageKey(key) {
   return [STORAGE_PREFIX, key].join('.');
+}
+
+/**
+ *
+ * @param {*} value
+ * @returns {boolean}
+ */
+function isJson(value) {
+  try {
+    JSON.parse(value);
+  } catch (e) {
+    return false;
+  }
+  return true;
 }
