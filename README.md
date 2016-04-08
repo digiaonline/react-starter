@@ -1,8 +1,13 @@
 # React starter
 
+[![Code Climate](https://codeclimate.com/github/nordsoftware/react-starter/badges/gpa.svg)](https://codeclimate.com/github/nordsoftware/react-starter)
+[![npm version](https://img.shields.io/npm/v/react-starter.svg)](https://www.npmjs.com/package/react-starter)
+[![npm downloads](https://img.shields.io/npm/dt/react-starter.svg)](https://www.npmjs.com/package/react-starter)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 Starter template for React applications.
 
-Building blocks:
+## Building blocks
 
 - [React](https://facebook.github.io/react/) User interface components
 - [React + Foundation](https://github.com/nordsoftware/react-foundation/) Foundation as React components  
@@ -17,11 +22,11 @@ Building blocks:
 - [Mocha](https://mochajs.org/) Testing framework
 - [Chai](http://chaijs.com/) Assertation library
 
-## Installation
+## Install
 
 Run the following command to install the dependencies:
 
-```
+```bash
 npm install
 ```
 
@@ -31,7 +36,7 @@ npm install
 
 Run the following command to start the development server:
 
-```
+```bash
 npm start
 ```
 
@@ -39,20 +44,24 @@ npm start
 
 Run the following command to build the distribution build:
 
-```
+```bash
 npm run dist
 ```
 
-## Test suite
+## Test
 
-Run the following command to run the test suite
+Run the following command to run the test suite:
 
-```
+```bash
 npm test
 ```
 
-Alternatively you can run the test suite in watch-mode:
+Alternatively you can run the test suite in watch mode:
 
 ```
 npm run test:watch
 ```
+
+## License
+
+See [LICENSE](LICENSE).
