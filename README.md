@@ -4,6 +4,7 @@
 [![npm version](https://img.shields.io/npm/v/react-starter.svg)](https://www.npmjs.com/package/react-starter)
 [![npm downloads](https://img.shields.io/npm/dt/react-starter.svg)](https://www.npmjs.com/package/react-starter)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Gitter](https://img.shields.io/gitter/room/norsoftware/chat.svg?maxAge=2592000)](https://gitter.im/nordsoftware/chat)
 
 Starter template for React applications.
 
