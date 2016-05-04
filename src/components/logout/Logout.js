@@ -1,13 +1,13 @@
 /*eslint no-unused-vars: 0*/
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { logout } from '../../actions/auth';
+import { logout } from '../../state/auth/actions';
 
 export class Logout extends Component {
-  componentDidMount() {
-    this.props.onLoad();
+  componentWillMount() {
+    this.props.onMount();
   }
 
   render() {
@@ -17,9 +17,13 @@ export class Logout extends Component {
   }
 }
 
+Logout.propTypes = {
+  onMount: PropTypes.func
+};
+
 function mapDispatchToProps(dispatch) {
   return {
-    onLoad: () => {
+    onMount: () => {
       dispatch(logout());
       dispatch(push('/login'));
     }

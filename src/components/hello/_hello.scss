@@ -1,3 +1,5 @@
 .hello {
-  margin: rem-calc(40) 0;
+  &__text {
+    margin: rem-calc(40 0);
+  }
 }

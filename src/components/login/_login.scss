@@ -1,13 +1,20 @@
 .login {
-  &-box {
+  &__title {
+    font-size: rem-calc(30);
+    font-weight: bold;
+    padding: rem-calc(40 0);
+    text-align: center;
+  }
+  
+  &__box {
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
     background: white;
-    margin: rem-calc(40) auto;
+    margin: auto;
     padding: rem-calc(20);
     width: 300px;
   }
 
-  .button[type=submit] {
+  &__submit {
     margin-bottom: 0;
   }
 }

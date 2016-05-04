@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { login } from '../../actions/auth';
+import { login } from '../../state/auth/actions';
 import { debug } from '../../helpers/log';
 import { Colors, Button } from 'react-foundation';
 
@@ -17,17 +17,16 @@ export class Login extends Component {
   }
 
   render() {
-    const { onSubmit } = this.props;
-
     const handleSubmit = event => {
       event.preventDefault();
 
-      onSubmit(this.refs.email.value, this.refs.password.value);
+      this.props.onSubmit(this.refs.email.value, this.refs.password.value);
     };
 
     return (
       <div className="login">
-        <div className="login-box">
+        <h2 className="login__title">React starter</h2>
+        <div className="login__box">
           <form onSubmit={handleSubmit}>
             <label>
               Email
@@ -37,7 +36,7 @@ export class Login extends Component {
               Password
               <input type="password" ref="password" placeholder="******" required/>
             </label>
-            <Button type="submit" color={Colors.PRIMARY} isExpanded>Log in</Button>
+            <Button className="login__submit" type="submit" color={Colors.PRIMARY} isExpanded>Log in</Button>
           </form>
         </div>
       </div>
@@ -49,7 +48,7 @@ function mapStateToProps(state) {
   return {
     isAuthenticated: state.auth.get('isAuthenticated'),
     errorMessage: state.auth.get('errorMessage'),
-    isLoading: state.auth.get('isLoading')
+    isLoading: state.auth.getIn(['session', 'isLoading'])
   };
 }
 

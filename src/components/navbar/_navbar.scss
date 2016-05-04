@@ -1,7 +1,8 @@
 .navbar {
-  .top-bar-title {
+  &__title > a {
     color: #222;
+    display: inline-block;
     font-weight: bold;
-    padding-top: 7px;
+    margin-top: 7px;
   }
 }

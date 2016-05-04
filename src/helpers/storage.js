@@ -1,6 +1,6 @@
 /*eslint no-undef: 0*/
 
-import { isString, isUndefined } from 'lodash';
+import { get, isString, isUndefined } from 'lodash';
 import { debug } from './log';
 
 if (isUndefined(STORAGE_PREFIX)) {
@@ -12,8 +12,10 @@ if (isUndefined(STORAGE_PREFIX)) {
  * @param {string} key
  */
 export function getStorageItem(key) {
-  const value = localStorage.getItem(buildStorageKey(key));
-  return isJson(value) ? JSON.parse(value) : value;
+  const [root, ...rest] = key.split('.');
+  const item = localStorage.getItem(buildStorageKey(root));
+  const value = isJson(item) ? JSON.parse(item) : item;
+  return rest.length ? get(value, rest.join('.')) : value;
 }
 
 /**

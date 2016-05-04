@@ -1,10 +1,10 @@
 /*eslint consistent-return: 0*/
 /*eslint no-undef: 0*/
 
-import { isUndefined } from 'lodash';
+import { forEach, isUndefined } from 'lodash';
 import { push } from 'react-router-redux';
 import { getIsAuthenticated, getAccessToken, getRefreshToken } from './auth';
-import { refreshSuccess } from '../actions/auth';
+import { refreshSuccess } from '../state/auth/actions';
 
 if (isUndefined(API_URL)) {
   throw new Error('API_URL must be set.');
@@ -23,6 +23,11 @@ export function fetchFromApi(url, init, dispatch) {
       .then(response => {
         switch (response.status) {
           case 401:
+            if (response.url === buildApiUrl('auth/login')) {
+              // Login failed
+              resolve(response);
+            }
+
             // Access denied (Access token has expired)
             const refreshToken = getRefreshToken();
 
@@ -94,6 +99,21 @@ function refresh(token, dispatch) {
         : reject(response))
       .catch(err => reject(err));
   });
+}
+
+/**
+ *
+ * @param {Object} query
+ * @returns {string}
+ */
+export function buildQueryString(query) {
+  const pairs = [];
+
+  forEach(query, (value, key) => {
+    pairs.push([key, value].join('='));
+  });
+
+  return pairs.length ? '?' + pairs.join('&') : '';
 }
 
 /**

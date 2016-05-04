@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import apiMiddleware from '../middleware/api';
-import * as reducers from '../reducers/index';
+import * as reducers from '../state/reducers';
 
 /**
  *

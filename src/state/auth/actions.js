@@ -1,15 +1,15 @@
 /*eslint no-undef: 0*/
 
-import { fetchFromApi } from '../helpers/api';
+import { fetchFromApi } from '../../helpers/api';
 
 export const AuthActionTypes = {
   LOGIN_REQUEST: 'AUTH/LOGIN_REQUEST',
   LOGIN_SUCCESS: 'AUTH/LOGIN_SUCCESS',
   LOGIN_FAILURE: 'AUTH/LOGIN_FAILURE',
-  LOAD_REQUEST: 'AUTH/LOAD_REQUEST',
-  LOAD_USER: 'AUTH/LOAD_USER',
-  LOAD_FAILURE: 'AUTH/LOAD_FAILURE',
-  LOGOUT: 'AUTH/LOGOUT'
+  LOGOUT: 'AUTH/LOGOUT',
+  USER_LOAD_REQUEST: 'AUTH/USER_LOAD_REQUEST',
+  USER_LOAD_SUCCESS: 'AUTH/USER_LOAD_SUCCESS',
+  USER_LOAD_FAILURE: 'AUTH/USER_LOAD_FAILURE'
 };
 
 /**
@@ -19,18 +19,23 @@ export const AuthActionTypes = {
  * @returns {Object}
  */
 export function login(username, password) {
-  const form = new FormData();
-
-  form.append('grant_type', 'password');
-  form.append('client_id', OAUTH_CLIENT_ID);
-  form.append('client_secret', OAUTH_CLIENT_SECRET);
-  form.append('username', username);
-  form.append('password', password);
+  const body = {
+    grant_type: 'password',
+    client_id: OAUTH_CLIENT_ID,
+    client_secret: OAUTH_CLIENT_SECRET,
+    username,
+    password
+  };
+  
+  const init = {
+    method: 'POST',
+    body: JSON.stringify(body)
+  };
 
   return {
     types: [AuthActionTypes.LOGIN_REQUEST, AuthActionTypes.LOGIN_SUCCESS, AuthActionTypes.LOGIN_FAILURE],
     shouldCallApi: state => !state.auth.get('isAuthenticated'),
-    callApi: dispatch => fetchFromApi('auth/login', { method: 'POST', body: form }, dispatch)
+    callApi: dispatch => fetchFromApi('auth/login', init, dispatch)
   };
 }
 
@@ -40,7 +45,7 @@ export function login(username, password) {
  */
 export function loadUser() {
   return {
-    types: [AuthActionTypes.LOAD_REQUEST, AuthActionTypes.LOAD_USER, AuthActionTypes.LOAD_FAILURE],
+    types: [AuthActionTypes.USER_LOAD_REQUEST, AuthActionTypes.USER_LOAD_SUCCESS, AuthActionTypes.USER_LOAD_FAILURE],
     shouldCallApi: state => state.auth.get('isAuthenticated'),
     callApi: dispatch => fetchFromApi('me', null, dispatch)
   };

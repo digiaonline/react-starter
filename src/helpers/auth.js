@@ -19,7 +19,7 @@ if (isUndefined(OAUTH_CLIENT_SECRET)) {
  */
 export function requireAuth(nextState, replace) {
   if (!getIsAuthenticated()) {
-    replace({ nextPathname: nextState.location.pathname }, 'login');
+    replace('login');
   }
 }
 
@@ -30,54 +30,52 @@ export function requireAuth(nextState, replace) {
  */
 export function requireGuest(nextState, replace) {
   if (getIsAuthenticated()) {
-    replace({ nextPathname: nextState.location.pathname }, '/');
+    replace('/');
   }
 }
 
 /**
  *
- * @param {string} token
+ * @param {Object} session
  */
-export function setAccessToken(token) {
-  setStorageItem('access_token', token);
+export function setSession(session) {
+  setStorageItem('auth_session', session);
 }
 
 /**
  *
- * @param {string} token
+ * @param {Object} user
  */
-export function setRefreshToken(token) {
-  setStorageItem('refresh_token', token);
+export function setUser(user) {
+  setStorageItem('auth_user', user);
 }
-
 /**
  *
- * @returns {string}
+ * @returns {Object}
  */
-export function getAccessToken() {
-  return getStorageItem('access_token');
+export function getSession() {
+  return getStorageItem('auth_session');
 }
-
 /**
  *
- * @returns {string}
+ * @returns {Object}
  */
-export function getRefreshToken() {
-  return getStorageItem('refresh_token');
-}
-
-/**
- *
- */
-export function removeAccessToken() {
-  removeStorageItem('access_token');
+export function getUser() {
+  return getStorageItem('auth_user');
 }
 
 /**
  *
  */
-export function removeRefreshToken() {
-  removeStorageItem('refresh_token');
+export function removeSession() {
+  removeStorageItem('auth_session');
+}
+
+/**
+ *
+ */
+export function removeUser() {
+  removeStorageItem('auth_user');
 }
 
 /**
@@ -86,4 +84,20 @@ export function removeRefreshToken() {
  */
 export function getIsAuthenticated() {
   return Boolean(getAccessToken());
+}
+
+/**
+ *
+ * @returns {string|null}
+ */
+export function getAccessToken() {
+  return getStorageItem('auth_session.access_token');
+}
+
+/**
+ *
+ * @returns {string|null}
+ */
+export function getRefreshToken() {
+  return getStorageItem('auth_session.refresh_token');
 }
