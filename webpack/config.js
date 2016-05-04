@@ -2,18 +2,18 @@ var path = require('path');
 
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, '../src/main.js')
+    app: [path.resolve(__dirname, '../src/main.js')]
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].[hash].js',
+    publicPath: '/',
     sourceMapFilename: '[name].[hash].js.map',
     chunkFilename: '[id].chunk.js'
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
-  devtool: 'source-map',
   module: {
     preLoaders: [
       {

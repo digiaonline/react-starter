@@ -3,7 +3,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var helpers = require('./helpers');
 
-var env = helpers.parseDotenvConfig(
+var environment = helpers.parseDotenvConfig(
   require('dotenv').config(path.resolve(__dirname, '../.env'))
 );
 
@@ -11,7 +11,10 @@ module.exports = Object.assign({}, {
   plugins: [
     new webpack.DefinePlugin(Object.assign({}, {
       'process.env.NODE_ENV': '"production"'
-    }, env)),
+    }, environment)),
+    new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    }),
     new HtmlWebpackPlugin({
       inject: 'body',
       template: 'src/main.html'

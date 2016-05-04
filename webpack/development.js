@@ -3,15 +3,19 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var helpers = require('./helpers');
 
-var env = helpers.parseDotenvConfig(
+var environment = helpers.parseDotenvConfig(
   require('dotenv').config(path.resolve(__dirname, '../.env'))
 );
 
-module.exports = Object.assign({}, {
+var development = Object.assign({}, {
+  devtool: 'source-map',
   plugins: [
     new webpack.DefinePlugin(Object.assign({}, {
       'process.env.NODE_ENV': '"development"'
-    }, env)),
+    }, environment)),
+    new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    }),
     new HtmlWebpackPlugin({
       inject: 'body',
       template: 'src/main.html'
@@ -20,3 +24,8 @@ module.exports = Object.assign({}, {
     new webpack.NoErrorsPlugin()
   ]
 }, require('./config'));
+
+development.entry.app.push('webpack-dev-server/client?http://localhost:8080');
+development.entry.app.push('webpack/hot/only-dev-server');
+
+module.exports = development;
