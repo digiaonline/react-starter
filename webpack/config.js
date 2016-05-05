@@ -1,9 +1,16 @@
 /*eslint no-undef: 0*/
 
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   context: path.resolve(__dirname, '..'),
+  output: {
+    path: path.resolve(__dirname, '../static/dist'),
+    filename: '[name].[hash].js',
+    sourceMapFilename: '[file].map',
+    chunkFilename: '[id].[hash].js'
+  },
   resolve: {
     modulesDirectories: [
       'src',
@@ -12,12 +19,6 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
   module: {
-    // preLoaders: [
-    //   {
-    //     test: /\.jsx?$/,
-    //     loader: 'source-map'
-    //   }
-    // ],
     loaders: [
       {
         test: /\.jsx?$/,
@@ -27,11 +28,6 @@ module.exports = {
       {
         test: /\.json$/,
         loader: 'json'
-      },
-      {
-        test: /\.scss$/,
-        loader: 'style!css!sass?sourceMap',
-        include: path.resolve(__dirname, '../src')
       },
       {
         test: isomorphicToolsPlugin.regular_expression('images'),
@@ -50,5 +46,10 @@ module.exports = {
         loader: 'file'
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    })
+  ]
 };

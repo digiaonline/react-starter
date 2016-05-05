@@ -4,12 +4,15 @@ var path = require('path');
 var webpack = require('webpack');
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var helpers = require('./helpers');
+var merge = require('merge-deep');
 
 global.isomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./isomorphic-tools'));
 
 var environment = helpers.getEnvironment(path.resolve(__dirname, '../.env'));
 
-module.exports = Object.assign({
+environment['process.env.NODE_ENV'] = "'development'";
+
+module.exports = merge({}, require('./config'), {
   devtool: 'inline-source-map',
   entry: {
     main: [
@@ -18,23 +21,21 @@ module.exports = Object.assign({
     ]
   },
   output: {
-    path: path.resolve(__dirname, '../dist'),
-    filename: '[name].[hash].js',
-    sourceMapFilename: '[name].[hash].js.map',
-    chunkFilename: '[id].chunk.js',
     publicPath: 'http://localhost:3001/'
   },
-  plugins: [
-    new webpack.DefinePlugin(Object.assign({
-      'process.env': {
-        'NODE_ENV': '"development"'
+  module: {
+    loaders: [
+      {
+        test: /\.scss$/,
+        loader: 'style!css!sass?sourceMap',
+        include: path.resolve(__dirname, '../src')
       }
-    }, environment)),
-    new webpack.ProvidePlugin({
-      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-    }),
+    ]
+  },
+  plugins: [
+    new webpack.DefinePlugin(environment),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     isomorphicToolsPlugin.development()
   ]
-}, require('./config'));
+});
