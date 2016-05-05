@@ -2,16 +2,16 @@
 
 require('babel-register')(require('../../package.json').babel);
 
-const fs = require('fs');
-const path = require('path');
-const basePath = path.resolve(__dirname, '../..');
-const LocalStorage = require('node-localstorage').LocalStorage;
-const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
-const isomorphicToolsConfig = require('../../webpack/isomorphic-tools');
+var fs = require('fs');
+var path = require('path');
+var basePath = path.resolve(__dirname, '../..');
+var LocalStorage = require('node-localstorage').LocalStorage;
+var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
+var isomorphicToolsConfig = require('../../webpack/isomorphic-tools');
 
 global.__DEVELOPMENT__ = process.env.NODE_ENV !== 'production';
 
-let environment = {};
+var environment = {};
 
 try {
   var envFilePath = path.resolve(__dirname, '../../.env');
