@@ -11,7 +11,7 @@ import createHistory from 'react-router/lib/createMemoryHistory';
 import { buildStore } from '../../helpers/store';
 import getRoutes from '../../routes';
 
-import { Html } from '../../components/html/html';
+import { Html } from '../components/html';
 
 /**
  * Express middleware that handles server-side rendering.
