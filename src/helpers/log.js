@@ -1,6 +1,8 @@
 /*eslint no-unused-expressions: 0*/
 /*eslint no-undef: 0*/
 
+import { isUndefined } from 'lodash';
+
 export const LogLevels = {
   LOG: 1,
   INFO: 2,
@@ -9,8 +11,13 @@ export const LogLevels = {
   DEBUG: 5
 };
 
-global.IS_LOGGING = global.IS_LOGGING || false;
-global.LOGGING_LEVEL = global.LOGGING_LEVEL || LogLevels.LOG;
+if (isUndefined(global.IS_LOGGING)) {
+  global.IS_LOGGING = false;
+}
+
+if (isUndefined(global.LOGGING_LEVEL)) {
+  global.LOGGING_LEVEL = LogLevels.LOG;
+}
 
 export function log() {
   shouldLog(LogLevels.LOG) && console.log.apply(console, arguments);

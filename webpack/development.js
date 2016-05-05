@@ -26,12 +26,11 @@ module.exports = Object.assign({
     publicPath: 'http://localhost:3001/'
   },
   plugins: [
-    new webpack.DefinePlugin({
+    new webpack.DefinePlugin(Object.assign({
       'process.env': {
         'NODE_ENV': '"development"'
-      },
-      environment
-    }),
+      }
+    }, environment)),
     new webpack.ProvidePlugin({
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     }),

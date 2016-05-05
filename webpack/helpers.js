@@ -18,7 +18,12 @@ function parseDotenvConfig(config) {
  */
 module.exports = {
   getEnvironment: function(path) {
-    var file = fs.lstatSync(path);
-    return file.isFile() ? parseDotenvConfig(dotenv.config(path)) : {};
+    var environment = {};
+    try {
+      environment = fs.lstatSync(path).isFile() ? parseDotenvConfig(dotenv.config(path)) : {};
+    } catch (e) {
+      // Do nothing...
+    }
+    return environment;
   }
 };

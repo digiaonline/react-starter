@@ -1,9 +1,11 @@
 /*eslint no-undef: 0*/
 
-import { isString } from 'lodash';
+import { isString, isUndefined } from 'lodash';
 import { debug } from './log';
 
-global.STORAGE_PREFIX = global.STORAGE_PREFIX || 'app';
+if (isUndefined(global.STORAGE_PREFIX)) {
+  global.STORAGE_PREFIX = 'app';
+}
 
 /**
  *

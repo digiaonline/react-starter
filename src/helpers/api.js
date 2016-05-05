@@ -1,12 +1,14 @@
 /*eslint consistent-return: 0*/
 /*eslint no-undef: 0*/
 
-import { forEach } from 'lodash';
+import { forEach, isUndefined } from 'lodash';
 import { push } from 'react-router-redux';
 import { getIsAuthenticated, getAccessToken, getRefreshToken } from './auth';
 import { refreshSuccess } from '../state/actions/auth';
 
-global.API_URL = global.API_URL || '//api.example.com/v1';
+if (isUndefined(global.API_URL)) {
+  global.API_URL = '//api.example.com/v1';
+}
 
 /**
  *

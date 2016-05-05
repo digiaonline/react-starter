@@ -1,9 +1,15 @@
 /*eslint no-undef: 0*/
 
+import { isUndefined } from 'lodash';
 import { getStorageItem, setStorageItem, removeStorageItem } from './storage';
 
-global.OAUTH_CLIENT_ID = global.OAUTH_CLIENT_ID || 'app';
-global.OAUTH_CLIENT_SECRET = global.OAUTH_CLIENT_SECRET || 'secret';
+if (isUndefined(global.OAUTH_CLIENT_ID)) {
+  global.OAUTH_CLIENT_ID = 'app';
+}
+
+if (isUndefined(global.OAUTH_CLIENT_SECRET)) {
+  global.OAUTH_CLIENT_SECRET = 'secret';
+}
 
 /**
  *
