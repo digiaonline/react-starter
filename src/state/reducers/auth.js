@@ -1,8 +1,8 @@
 /*eslint no-unused-vars: 0*/
 
-import { fromJS, Map } from 'immutable';
+import { fromJS } from 'immutable';
 import { createReducer } from '../../helpers/store';
-import { AuthActionTypes } from './actions';
+import { AuthActionTypes } from '../actions/auth';
 import {
   setSession,
   setUser,

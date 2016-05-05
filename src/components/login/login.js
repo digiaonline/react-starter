@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { login } from '../../state/auth/actions';
+import { login } from '../../state/actions/auth';
 import { debug } from '../../helpers/log';
 import { Colors, Button } from 'react-foundation';
 

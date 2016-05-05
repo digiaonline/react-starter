@@ -1,8 +1,9 @@
+import { fromJS } from 'immutable';
 import { combineReducers, applyMiddleware, createStore } from 'redux';
 import { browserHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
-import apiMiddleware from '../middleware/api';
+import * as middlewares from '../state/middlewares';
 import * as reducers from '../state/reducers';
 
 /**
@@ -24,11 +25,29 @@ export function createReducer(initialState, handlers) {
 
 /**
  *
+ * @param {Object} state
+ * @returns {Object}
+ */
+export function hydrateState(state = {}) {
+  return {
+    ...state,
+    auth: state.auth ? fromJS(state.auth) : undefined
+  };
+}
+
+/**
+ *
+ * @param {Object} history
+ * @param {Object} initialState
  * @returns {function}
  */
-export function buildStore() {
+export function buildStore(history, initialState) {
   const rootReducer = combineReducers(reducers);
-  const routerHistoryMiddleware = routerMiddleware(browserHistory);
+  const routerHistoryMiddleware = routerMiddleware(history);
 
-  return applyMiddleware(thunk, apiMiddleware, routerHistoryMiddleware)(createStore)(rootReducer);
+  return createStore(
+    rootReducer,
+    initialState,
+    applyMiddleware(thunk, routerHistoryMiddleware, ...middlewares)
+  );
 }
