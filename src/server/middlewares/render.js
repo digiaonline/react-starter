@@ -35,11 +35,15 @@ export default function renderMiddleware(req, res) {
       } else if (redirect) {
         res.redirect(redirect.pathname + redirect.search);
       } else if (renderProps) {
-        const assets = isomorphicTools.assets();
-        const component = <Provider store={store}><ReduxAsyncConnect {...renderProps}/></Provider>;
-        const initialState = store.getState();
+        const component = (
+          <Provider store={store} key="provider">
+            <ReduxAsyncConnect {...renderProps}/>
+          </Provider>
+        );
 
-        const html = renderToString(<Html assets={assets} component={component} initialState={initialState}/>);
+        const html = renderToString(<Html assets={isomorphicTools.assets()}
+                                          component={component}
+                                          initialState={store.getState()}/>);
 
         // Send the rendered page back to the client
         res.status(200).send(`<!doctype html>\n${html}`);
