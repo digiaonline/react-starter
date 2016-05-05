@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Gitter](https://img.shields.io/gitter/room/norsoftware/open-source.svg?maxAge=2592000)](https://gitter.im/nordsoftware/open-source)
 
-Starter template for React applications.
+Starter template for React universal applications.
 
 ## Building blocks
 
@@ -15,9 +15,11 @@ Starter template for React applications.
 - [Redux](http://redux.js.org/) Predictable state container
 - [Immutable](https://facebook.github.io/immutable-js/) Immutable collections
 - [Lodash](https://lodash.com/) Utility library
+- [Dotenv](https://github.com/motdotla/dotenv) Environment variables
 - [Babel](https://babeljs.io/) ES.Next transpiler
 - [Eslint](http://eslint.org/) Linting utility
 - [Webpack](https://webpack.github.io/) Module bundler
+- [Express](http://expressjs.com/) Server framework
 - [Foundation](http://foundation.zurb.com/sites.html) CSS framework
 - [SASS](http://sass-lang.com/) CSS pre-processor
 - [Mocha](https://mochajs.org/) Testing framework
@@ -33,17 +35,25 @@ npm install
 
 ## Usage
 
-### Development server
+### Application server
 
-Run the following command to start the development server:
+Start the application server:
 
 ```bash
 npm start
 ```
 
+### Webpack development server
+
+Start the development server:
+
+```bash
+npm run dev-server
+```
+
 ### Distribution build
 
-Run the following command to build the distribution build:
+Build the distribution build:
 
 ```bash
 npm run dist
@@ -51,16 +61,22 @@ npm run dist
 
 ## Test
 
-Run the following command to run the test suite:
+Run the test suite:
 
 ```bash
 npm test
 ```
 
-Alternatively you can run the test suite in watch mode:
+Run the test suite in watch mode:
 
-```
+```bash
 npm run test:watch
+```
+
+Generate code coverage report:
+
+```bash
+npm run test:cover
 ```
 
 ## License
