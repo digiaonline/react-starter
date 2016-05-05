@@ -1,6 +1,5 @@
 import { fromJS } from 'immutable';
 import { combineReducers, applyMiddleware, createStore } from 'redux';
-import { browserHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import * as middlewares from '../state/middlewares';

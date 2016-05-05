@@ -2,15 +2,8 @@
 
 import { getStorageItem, setStorageItem, removeStorageItem } from './storage';
 
-import { isUndefined } from 'lodash';
-
-if (isUndefined(OAUTH_CLIENT_ID)) {
-  throw new Error('OAUTH_CLIENT_ID must be set.');
-}
-
-if (isUndefined(OAUTH_CLIENT_SECRET)) {
-  throw new Error('OAUTH_CLIENT_SECRET must be set.');
-}
+global.OAUTH_CLIENT_ID = global.OAUTH_CLIENT_ID || 'app';
+global.OAUTH_CLIENT_SECRET = global.OAUTH_CLIENT_SECRET || 'secret';
 
 /**
  *

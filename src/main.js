@@ -5,17 +5,19 @@ import { render } from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
+import { ReduxAsyncConnect } from 'redux-async-connect';
 
-import { buildStore } from './helpers/store';
+import { buildStore, hydrateState } from './helpers/store';
 import getRoutes from './routes';
 import './main.scss';
 
-const store = buildStore();
+const initialState = hydrateState(window.__INITIAL_STATE__);
+const store = buildStore(browserHistory, initialState);
 const history = syncHistoryWithStore(browserHistory, store);
 
 render(
   <Provider store={store}>
-    <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
+    <Router onUpdate={() => window.scrollTo(0, 0)} render={props => <ReduxAsyncConnect {...props}/>} history={history}>
       {getRoutes()}
     </Router>
   </Provider>,

@@ -1,30 +1,24 @@
+/*eslint no-undef: 0*/
+
 var path = require('path');
 
 module.exports = {
-  entry: {
-    app: [path.resolve(__dirname, '../src/main.js')]
-  },
-  output: {
-    path: path.resolve(__dirname, '../dist'),
-    filename: '[name].[hash].js',
-    publicPath: '/',
-    sourceMapFilename: '[name].[hash].js.map',
-    chunkFilename: '[id].chunk.js'
-  },
+  context: path.resolve(__dirname, '..'),
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
   module: {
-    preLoaders: [
-      {
-        test: /\.jsx?$/,
-        loader: 'source-map'
-      }
-    ],
+    // preLoaders: [
+    //   {
+    //     test: /\.jsx?$/,
+    //     loader: 'source-map'
+    //   }
+    // ],
     loaders: [
       {
         test: /\.jsx?$/,
-        loader: 'babel?cacheDirectory=true!eslint'
+        loader: 'react-hot!babel!eslint',
+        include: path.resolve(__dirname, '../src')
       },
       {
         test: /\.json$/,
@@ -32,10 +26,11 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: 'style!css!sass?sourceMap'
+        loader: 'style!css!sass?sourceMap',
+        include: path.resolve(__dirname, '../src')
       },
       {
-        test: /\.(png|jpg|jpeg|gif)$/,
+        test: isomorphicToolsPlugin.regular_expression('images'),
         loader: 'url?prefix=img/&limit=5000'
       },
       {

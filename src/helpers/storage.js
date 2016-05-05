@@ -1,21 +1,17 @@
 /*eslint no-undef: 0*/
 
-import { get, isString, isUndefined } from 'lodash';
+import { isString } from 'lodash';
 import { debug } from './log';
 
-if (isUndefined(STORAGE_PREFIX)) {
-  throw new Error('STORAGE_PREFIX must be set.');
-}
+global.STORAGE_PREFIX = global.STORAGE_PREFIX || 'app';
 
 /**
  *
  * @param {string} key
  */
 export function getStorageItem(key) {
-  const [root, ...rest] = key.split('.');
-  const item = localStorage.getItem(buildStorageKey(root));
-  const value = isJson(item) ? JSON.parse(item) : item;
-  return rest.length ? get(value, rest.join('.')) : value;
+  const value = localStorage.getItem(buildStorageKey(key));
+  return isJson(value) ? JSON.parse(value) : value;
 }
 
 /**

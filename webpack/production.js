@@ -8,6 +8,7 @@ var environment = helpers.parseDotenvConfig(
 );
 
 module.exports = Object.assign({}, {
+  devtool: 'source-map',
   plugins: [
     new webpack.DefinePlugin(Object.assign({}, {
       'process.env.NODE_ENV': '"production"'
