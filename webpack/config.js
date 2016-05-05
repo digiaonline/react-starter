@@ -5,6 +5,10 @@ var path = require('path');
 module.exports = {
   context: path.resolve(__dirname, '..'),
   resolve: {
+    modulesDirectories: [
+      'src',
+      'node_modules'
+    ],
     extensions: ['', '.js', '.jsx']
   },
   module: {
