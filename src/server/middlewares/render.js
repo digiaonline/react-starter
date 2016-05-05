@@ -41,12 +41,12 @@ export default function renderMiddleware(req, res) {
           </Provider>
         );
 
-        const html = renderToString(<Html assets={isomorphicTools.assets()}
-                                          component={component}
-                                          initialState={store.getState()}/>);
+        const renderedHtml = renderToString(<Html assets={isomorphicTools.assets()}
+                                                  component={component}
+                                                  initialState={store.getState()}/>);
 
         // Send the rendered page back to the client
-        res.status(200).send(`<!doctype html>\n${html}`);
+        res.status(200).send(`<!doctype html>${renderedHtml}`);
       } else {
         res.status(404).send('Not found.');
       }
