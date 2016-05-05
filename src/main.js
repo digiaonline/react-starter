@@ -16,7 +16,7 @@ const store = buildStore(browserHistory, initialState);
 const history = syncHistoryWithStore(browserHistory, store);
 
 render(
-  <Provider store={store}>
+  <Provider store={store} key="provider">
     <Router onUpdate={() => window.scrollTo(0, 0)} render={props => <ReduxAsyncConnect {...props}/>} history={history}>
       {getRoutes()}
     </Router>
