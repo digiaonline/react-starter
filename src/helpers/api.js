@@ -4,10 +4,23 @@
 import { forEach, isUndefined } from 'lodash';
 import { push } from 'react-router-redux';
 import { getIsAuthenticated, getAccessToken, getRefreshToken } from './auth';
+import { defer } from './promise';
 import { refreshSuccess } from '../state/actions/auth';
 
 if (isUndefined(global.API_URL)) {
   global.API_URL = '//api.example.com/v1';
+}
+
+if (isUndefined(global.LOGIN_URL)) {
+  global.LOGIN_URL = 'auth/login';
+}
+
+if (isUndefined(global.REFRESH_URL)) {
+  global.REFRESH_URL = 'auth/refresh';
+}
+
+if (isUndefined(global.LOGOUT_ROUTE)) {
+  global.LOGOUT_ROUTE = '/logout';
 }
 
 /**
@@ -18,46 +31,90 @@ if (isUndefined(global.API_URL)) {
  * @returns {Promise}
  */
 export function fetchFromApi(url, init, dispatch) {
-  return new Promise((resolve, reject) => {
-    fetch(buildRequest(url, init))
-      .then(response => {
-        switch (response.status) {
-          case 401:
-            if (response.url === buildApiUrl('auth/login')) {
-              // Login failed
-              resolve(response);
-            }
+  const deferred = defer();
+  const request = buildRequest(url, init);
 
-            // Access denied (Access token has expired)
-            const refreshToken = getRefreshToken();
+  fetch(request)
+    .then(response => handleResponse(deferred, request, response, dispatch))
+    .catch(err => deferred.reject(err));
 
-            if (refreshToken) {
-              return refresh(refreshToken, dispatch)
-                .then(result => {
-                  dispatch(refreshSuccess(result));
+  return deferred.promise;
+}
 
-                  fetch(buildRequest(url, init)).then(res => resolve(res));
-                });
-            }
+/**
+ *
+ * @param {Object} deferred
+ * @param {Request} request
+ * @param {Object} response
+ * @param {function} dispatch
+ * @returns {*}
+ */
+export function handleResponse(deferred, request, response, dispatch) {
+  switch (response.status) {
+    case 401:
+      return handleAccessDenied(deferred, request, response, dispatch);
 
-            return reject();
+    case 403:
+      return handleForbidden(deferred, response, dispatch);
 
-          case 403:
-            // Forbidden
-            if (response.url === buildApiUrl('auth/refresh')) {
-              // Refresh token has expired, log out the user
-              dispatch(push('/logout'));
-            }
+    case 200:
+    default:
+      return handleOk(deferred);
+  }
+}
 
-            return resolve(response);
+/**
+ *
+ * @param {Object} deferred
+ * @param {Request} request
+ * @param {Object} response
+ * @param {function} dispatch
+ * @returns {*}
+ */
+export function handleAccessDenied(deferred, request, response, dispatch) {
+  if (response.url === buildApiUrl(LOGIN_URL)) {
+    // Login failed
+    deferred.resolve(response);
+  }
 
-          default:
-            // Ok
-            return resolve(response);
-        }
-      })
-      .catch(err => reject(err));
-  });
+  // Access token has expired
+  const refreshToken = getRefreshToken();
+
+  if (refreshToken) {
+    return refresh(refreshToken, dispatch)
+      .then(result => {
+        dispatch(refreshSuccess(result));
+        // Retry the original request
+        fetch(request).then(res => deferred.resolve(res));
+      });
+  }
+
+  return deferred.reject();
+}
+
+/**
+ *
+ * @param {Object} deferred
+ * @param {Object} response
+ * @param {function} dispatch
+ * @returns {*}
+ */
+export function handleForbidden(deferred, response, dispatch) {
+  if (response.url === buildApiUrl(REFRESH_URL)) {
+    // Refresh token has expired, log out the user
+    dispatch(push(LOGOUT_ROUTE));
+  }
+
+  return deferred.resolve(response);
+}
+
+/**
+ *
+ * @param {Object} deferred
+ * @param {Object} response
+ */
+export function handleOk(deferred, response) {
+  return deferred.resolve(response);
 }
 
 /**
