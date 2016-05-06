@@ -35,31 +35,25 @@ npm install
 
 ## Usage
 
-### Application server
-
 Start the application server:
 
 ```bash
 npm start
 ```
 
-### Webpack development server
-
-Start the development server:
+Start the Webpack development server:
 
 ```bash
 npm run dev-server
 ```
 
-### Distribution build
-
-Build the distribution build:
+Create the distribution build:
 
 ```bash
-npm run dist
+npm run build
 ```
 
-## Test
+## Tests
 
 Run the test suite:
 
@@ -70,10 +64,10 @@ npm test
 Run the test suite in watch mode:
 
 ```bash
-npm run test:watch
+npm run test:watch <path>
 ```
 
-Generate code coverage report:
+Generate the code coverage report:
 
 ```bash
 npm run test:cover

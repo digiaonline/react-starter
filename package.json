@@ -6,7 +6,7 @@
   "scripts": {
     "dev-server": "node webpack/dev-server.js",
     "start": "node src/server/bootstrap.js",
-    "dist": "webpack -p --config webpack/production.js",
+    "build": "webpack -p --config webpack/production.js",
     "lint": "eslint src",
     "test": "mocha --compilers js:babel-core/register --require test/index.js --recursive",
     "test:cover": "istanbul cover _mocha -- --compilers js:babel-core/register --require test/index.js --recursive",
