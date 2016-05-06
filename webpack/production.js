@@ -8,7 +8,7 @@ var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var helpers = require('./helpers');
 var merge = require('merge-deep');
 
-global.isomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./isomorphic-tools'));
+var isomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./isomorphic-tools'));
 
 var environment = helpers.getEnvironment(path.resolve(__dirname, '../.env'));
 
@@ -16,7 +16,7 @@ environment['process.env.NODE_ENV'] = "'production'";
 
 var extractStylesPlugin = new ExtractTextPlugin('[name].[hash].css');
 
-module.exports = merge({}, require('./config'), {
+module.exports = merge({}, require('./config')(isomorphicToolsPlugin), {
   devtool: 'source-map',
   entry: {
     main: [
