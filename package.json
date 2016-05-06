@@ -5,6 +5,7 @@
   "main": "src/main.js",
   "scripts": {
     "dev-server": "node webpack/dev-server.js",
+    "start:dev": "nodemon src/server/bootstrap.js",
     "start": "node src/server/bootstrap.js",
     "build": "webpack -p --config webpack/production.js",
     "lint": "eslint src",
