@@ -25,6 +25,9 @@ export function getStorageItem(key) {
  * @param {*} value
  */
 export function setStorageItem(key, value) {
+  if (typeof localStorage === 'undefined') {
+    return;
+  }
   if (!isString(value)) {
     value = JSON.stringify(value);
   }
@@ -37,6 +40,9 @@ export function setStorageItem(key, value) {
  * @param {string} key
  */
 export function removeStorageItem(key) {
+  if (typeof localStorage === 'undefined') {
+    return;
+  }
   localStorage.removeItem(buildStorageKey(key));
   debug('storage item removed: %s', key);
 }
