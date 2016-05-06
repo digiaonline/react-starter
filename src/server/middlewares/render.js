@@ -16,10 +16,9 @@ import { Html } from '../components/html';
 /**
  * Express middleware that handles server-side rendering.
  *
- * @param {Request} req
- * @param {Response} res
+ * @param {Object} isomorphicTools
  */
-export default function renderMiddleware(req, res) {
+const renderMiddleware = (isomorphicTools) => (req, res) => {
   if (__DEVELOPMENT__) {
     isomorphicTools.refresh();
   }
@@ -52,4 +51,6 @@ export default function renderMiddleware(req, res) {
       }
     });
   });
-}
+};
+
+export default renderMiddleware;

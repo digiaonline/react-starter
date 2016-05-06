@@ -12,6 +12,9 @@ if (isUndefined(global.STORAGE_PREFIX)) {
  * @param {string} key
  */
 export function getStorageItem(key) {
+  if (typeof localStorage === 'undefined') {
+    return null;
+  }
   const value = localStorage.getItem(buildStorageKey(key));
   return isJson(value) ? JSON.parse(value) : value;
 }

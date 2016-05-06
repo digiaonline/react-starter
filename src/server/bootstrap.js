@@ -4,10 +4,6 @@ require('babel-register')(require('../../package.json').babel);
 
 var fs = require('fs');
 var path = require('path');
-var basePath = path.resolve(__dirname, '../..');
-var LocalStorage = require('node-localstorage').LocalStorage;
-var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
-var isomorphicToolsConfig = require('../../webpack/isomorphic-tools');
 
 global.__DEVELOPMENT__ = process.env.NODE_ENV !== 'production';
 
@@ -25,12 +21,5 @@ Object.keys(environment).map((key) => {
   global[key] = environment[key];
 });
 
-// setup local storage
-global.localStorage = new LocalStorage('./storage');
-
-// this global variable will be used later in express middleware
-global.isomorphicTools = new WebpackIsomorphicTools(isomorphicToolsConfig)
-  .development(__DEVELOPMENT__)
-  .server(basePath, () => {
-    require('./index');
-  });
+// Setup isomorphic tools, which in turn starts the application server
+require('./isomorphic-tools');
