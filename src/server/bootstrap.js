@@ -4,6 +4,9 @@ require('babel-register')(require('../../package.json').babel);
 
 var fs = require('fs');
 var path = require('path');
+var fetch = require('node-fetch');
+
+global.fetch = fetch;
 
 global.__DEVELOPMENT__ = process.env.NODE_ENV !== 'production';
 
