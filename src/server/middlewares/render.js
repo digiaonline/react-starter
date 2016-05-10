@@ -5,7 +5,7 @@ import { renderToString } from 'react-dom/server';
 import { match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
-import { ReduxAsyncConnect, loadOnServer } from 'redux-async-connect';
+import { fetchDataOnServer, FetchData } from '../../state/modules/fetch-data';
 import createHistory from 'react-router/lib/createMemoryHistory';
 
 import { buildStore } from '../../helpers/store';
@@ -18,7 +18,7 @@ import { Html } from '../components/html';
  *
  * @param {Object} isomorphicTools
  */
-const renderMiddleware = (isomorphicTools) => (req, res) => {
+const renderMiddleware = isomorphicTools => (req, res) => {
   if (__DEVELOPMENT__) {
     isomorphicTools.refresh();
   }
@@ -28,15 +28,15 @@ const renderMiddleware = (isomorphicTools) => (req, res) => {
   const history = syncHistoryWithStore(memoryHistory, store);
 
   match({ routes: getRoutes(), location: req.url, history }, (err, redirect, renderProps) => {
-    loadOnServer(renderProps, store).then(() => {
+    fetchDataOnServer(renderProps, store).then(() => {
       if (err) {
-        console.error(err);
+        res.status(500).send(err.message);
       } else if (redirect) {
         res.redirect(redirect.pathname + redirect.search);
       } else if (renderProps) {
         const component = (
           <Provider store={store} key="provider">
-            <ReduxAsyncConnect {...renderProps}/>
+            <FetchData {...renderProps}/>
           </Provider>
         );
 

@@ -1,9 +1,8 @@
 import { fromJS } from 'immutable';
 import { combineReducers, applyMiddleware, createStore } from 'redux';
+import promiseMiddleware from 'redux-promise';
 import { routerMiddleware } from 'react-router-redux';
-import thunk from 'redux-thunk';
-import * as middlewares from '../state/middlewares';
-import * as reducers from '../state/reducers';
+import * as reducers from '../state/index';
 
 /**
  *
@@ -30,7 +29,8 @@ export function createReducer(initialState, handlers) {
 export function hydrateState(state = {}) {
   return {
     ...state,
-    auth: state.auth ? fromJS(state.auth) : undefined
+    auth: state.auth ? fromJS(state.auth) : undefined,
+    planets: state.planets ? fromJS(state.planets) : undefined
   };
 }
 
@@ -47,6 +47,6 @@ export function buildStore(history, initialState) {
   return createStore(
     rootReducer,
     initialState,
-    applyMiddleware(thunk, routerHistoryMiddleware, ...middlewares)
+    applyMiddleware(routerHistoryMiddleware, promiseMiddleware)
   );
 }

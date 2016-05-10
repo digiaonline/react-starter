@@ -4,6 +4,7 @@
 @include foundation-flex-classes;
 @include foundation-everything;
 
+@import "components/planets/planets";
 @import "components/login/login";
 @import "components/hello/hello";
 @import "components/navbar/navbar";
