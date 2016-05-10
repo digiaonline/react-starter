@@ -59,7 +59,7 @@ export function handleResponse(deferred, request, response, dispatch) {
 
     case 200:
     default:
-      return handleOk(deferred);
+      return handleOk(deferred, response);
   }
 }
 
