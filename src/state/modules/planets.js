@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable';
 import { find } from 'lodash';
 import { createAction, handleActions } from 'redux-actions';
-import { fetchPlanets } from '../../helpers/swapi';
+import { getPlanets } from '../../helpers/swapi';
 
 const LOAD_DATA = 'planets/LOAD_DATA';
 const FETCH_DATA = 'planets/FETCH_DATA';
@@ -32,6 +32,6 @@ const reducer = handleActions({
 }, defaultState);
 
 export const loadData = createAction(LOAD_DATA);
-export const fetchData = createAction(FETCH_DATA, fetchPlanets);
+export const fetchData = createAction(FETCH_DATA, getPlanets);
 
 export default reducer;
