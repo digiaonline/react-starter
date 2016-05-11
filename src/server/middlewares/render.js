@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { match } from 'react-router';
+import { match, RouterContext } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
-import { fetchDataOnServer, FetchData } from '../../state/modules/fetch-data';
+import { fetchDataOnServer } from '../../redux-fetch-data/index';
 import createHistory from 'react-router/lib/createMemoryHistory';
 
 import { buildStore } from '../../helpers/store';
@@ -36,7 +36,7 @@ const renderMiddleware = isomorphicTools => (req, res) => {
       } else if (renderProps) {
         const component = (
           <Provider store={store} key="provider">
-            <FetchData {...renderProps}/>
+            <RouterContext {...renderProps}/>
           </Provider>
         );
 

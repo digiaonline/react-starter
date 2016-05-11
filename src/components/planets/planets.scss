@@ -1,9 +1,8 @@
 .planets {
-  margin: rem-calc(40 0);
   text-align: center;
 
   &__title {
-    margin-bottom: rem-calc(40);
+    margin: rem-calc(40 0);
   }
 
   &-list {

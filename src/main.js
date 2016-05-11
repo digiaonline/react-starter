@@ -6,7 +6,7 @@ import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import { FetchData } from './state/modules/fetch-data';
+import { FetchData } from './redux-fetch-data/index';
 
 import { buildStore, hydrateState } from './helpers/store';
 import getRoutes from './routes';

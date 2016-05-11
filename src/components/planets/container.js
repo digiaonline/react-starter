@@ -11,11 +11,19 @@ import { loadData, fetchData } from '../../state/modules/planets';
 import PlanetsList from '../../components/planets/list';
 
 export class Planets extends Component {
-  static fetchData({ dispatch }) {
-    return Promise.all([
-      dispatch(loadData()),
-      dispatch(fetchData())
-    ]);
+  static fetchData({ dispatch, getState }) {
+    const promises = [];
+
+    console.log('check if need fetch planets');
+
+    if (!getState().planets.get('data').size) {
+      console.log('fetching planets');
+
+      promises.push(dispatch(loadData()));
+      promises.push(dispatch(fetchData()));
+    }
+
+    return Promise.all(promises);
   }
 
   render() {
@@ -46,17 +54,11 @@ Planets.defaultProps = {
 
 function mapStateToProps(state) {
   return {
-    data: state.planets.get('data').toJS(),
-    isLoading: state.planets.get('loading')
+    isLoading: state.planets.get('loading'),
+    data: state.planets.get('data').toJS()
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators({ loadData }, dispatch)
-  };
-}
-
-const PlanetsContainer = connect(mapStateToProps, mapDispatchToProps)(Planets);
+const PlanetsContainer = connect(mapStateToProps)(Planets);
 
 export default PlanetsContainer;
