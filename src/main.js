@@ -9,7 +9,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { FetchData } from './redux-fetch-data/index';
 
 import { buildStore, hydrateState } from './helpers/store';
-import getRoutes from './routes';
+import routes from './routes';
 import './main.scss';
 
 const initialState = hydrateState(window.__INITIAL_STATE__);
@@ -20,9 +20,8 @@ render(
   <Provider store={store} key="provider">
     <Router onUpdate={() => window.scrollTo(0, 0)}
             render={props => <FetchData {...props}/>}
-            history={history}>
-      {getRoutes()}
-    </Router>
+            history={history}
+            routes={routes}/>
   </Provider>,
   document.getElementById('root')
 );

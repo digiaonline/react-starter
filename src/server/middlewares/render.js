@@ -9,7 +9,7 @@ import { fetchDataOnServer } from '../../redux-fetch-data/index';
 import createHistory from 'react-router/lib/createMemoryHistory';
 
 import { buildStore } from '../../helpers/store';
-import getRoutes from '../../routes';
+import routes from '../../routes';
 
 import { Html } from '../components/html';
 
@@ -27,7 +27,7 @@ const renderMiddleware = isomorphicTools => (req, res) => {
   const store = buildStore(memoryHistory);
   const history = syncHistoryWithStore(memoryHistory, store);
 
-  match({ routes: getRoutes(), location: req.url, history }, (err, redirect, renderProps) => {
+  match({ routes, location: req.url, history }, (err, redirect, renderProps) => {
     fetchDataOnServer(renderProps, store).then(() => {
       if (err) {
         res.status(500).send(err.message);

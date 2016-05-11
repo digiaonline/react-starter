@@ -13,7 +13,7 @@ const RouteTypes = {
 
 export const route = name => RouteTypes[name];
 
-export default () => (
+export default (
   <Route path="/" component={App}>
     <IndexRoute component={HelloContainer}/>
     <Route path={RouteTypes.planets} component={PlanetsContainer}/>
