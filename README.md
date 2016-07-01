@@ -1,6 +1,7 @@
 # React starter
 
 [![Code Climate](https://codeclimate.com/github/nordsoftware/react-starter/badges/gpa.svg)](https://codeclimate.com/github/nordsoftware/react-starter)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nordsoftware/react-starter/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nordsoftware/react-starter/?branch=master)
 [![StyleCI](https://styleci.io/repos/47612236/shield?style=flat)](https://styleci.io/repos/47612236)
 [![npm version](https://img.shields.io/npm/v/react-starter.svg)](https://www.npmjs.com/package/react-starter)
 [![npm downloads](https://img.shields.io/npm/dt/react-starter.svg)](https://www.npmjs.com/package/react-starter)
