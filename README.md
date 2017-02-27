@@ -2,7 +2,7 @@
 
 ## DEPRECATED
 
-This project is being deprecated in favor of our new [React Boilerplate](https://github.com/nordsoftware/react-boilerplate/).**
+**This project is being deprecated in favor of our new [React Boilerplate](https://github.com/nordsoftware/react-boilerplate/).**
 
 [![Code Climate](https://codeclimate.com/github/nordsoftware/react-starter/badges/gpa.svg)](https://codeclimate.com/github/nordsoftware/react-starter)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nordsoftware/react-starter/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nordsoftware/react-starter/?branch=master)
